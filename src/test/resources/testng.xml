@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <parameter name="language" value="English"/>
+    <parameter name="year" value="1990"/>
+    <parameter name="gameName" value="Forza Horizon 4"/>
+    <test name="SteamTest">
+        <classes>
+            <class name="steampowered.tests.BaseTest">
+            </class>
+        </classes>
+    </test>
+</suite>
