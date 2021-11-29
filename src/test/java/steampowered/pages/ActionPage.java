@@ -34,7 +34,7 @@ public class ActionPage extends Page {
         List<WebElement> maxDiscountsList = baseElement.findElementsByName(DIV_MAX_DISCOUNT, nameDisc);
         if(maxDiscountsList.size() == 1){
 
-          baseElement.findElementByName(DIV_MAX_DISCOUNT, nameDisc).click();
+          baseElement.clickAndWait(DIV_MAX_DISCOUNT, nameDisc);
         } else {
             int random = (int) (Math.random() * (maxDiscountsList.size()));
             maxDiscountsList.get(random).click();
