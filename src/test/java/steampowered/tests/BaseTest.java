@@ -13,10 +13,7 @@ import steampowered.pages.*;
 public class BaseTest {
 
     private static Browser currentBrowser;
-    public static MainPage mainPage;
-    public static ActionPage actionPage;
-    public static GamePage gamePage;
-    public static InstallPage installPage;
+    private static InstallPage installPage ;
 
 
     @BeforeClass
@@ -30,12 +27,12 @@ public class BaseTest {
     public void testChooseGameWithMaxDiscount( String language, String year, String gameName) {
 
 
-        mainPage = new MainPage(currentBrowser.getDriver());
+        MainPage mainPage = new MainPage(currentBrowser.getDriver());
         mainPage.changeLanguage(language);
         mainPage.navigateSection(language + "_section", language + "_subSection");
-        actionPage = new ActionPage(currentBrowser.getDriver());
+        ActionPage actionPage = new ActionPage(currentBrowser.getDriver());
         actionPage.choseGameWithMaxDiscount();
-        gamePage = new GamePage(currentBrowser.getDriver());
+        GamePage gamePage = new GamePage(currentBrowser.getDriver());
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(gamePage.getGameName(year), gameName);
         gamePage.clickInstallSteam("Install Steam");
@@ -47,6 +44,6 @@ public class BaseTest {
     @AfterClass
     public void closeBrowser() {
        installPage.deleteInstalledFile();
-        currentBrowser.teardown();
+        Browser.teardown();
     }
 }

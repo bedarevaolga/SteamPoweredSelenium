@@ -13,7 +13,7 @@ public class ActionPage extends Page {
     }
 
     private final By divDiscount = By.xpath("//div[@class='capsule header']/following-sibling::div/descendant::div[@class=\"discount_pct\"]");
-    private final String divMaxDiscount = "//div[@class='capsule header']/following-sibling::div/descendant::div[@class=\"discount_pct\" and text()='%s']";
+    private static final String DIV_MAX_DISCOUNT = "//div[@class='capsule header']/following-sibling::div/descendant::div[@class=\"discount_pct\" and text()='%s']";
 
     public int findMaxDiscounts() {
         List<WebElement> discounts = baseElement.findElements(divDiscount);
@@ -30,10 +30,10 @@ public class ActionPage extends Page {
 
     public void choseGameWithMaxDiscount() {
 
-        List<WebElement> maxDiscountsList = baseElement.findElementsByName(divMaxDiscount, "-" + findMaxDiscounts() + "%");
+        List<WebElement> maxDiscountsList = baseElement.findElementsByName(DIV_MAX_DISCOUNT, "-" + findMaxDiscounts() + "%");
         if(maxDiscountsList.size() == 1){
             String nameDisc = "-" + findMaxDiscounts() + "%";
-          baseElement.findElementByName(divMaxDiscount, nameDisc).click();
+          baseElement.findElementByName(DIV_MAX_DISCOUNT, nameDisc).click();
         } else {
             int random = (int) (Math.random() * (maxDiscountsList.size()));
             maxDiscountsList.get(random).click();

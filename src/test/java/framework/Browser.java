@@ -7,6 +7,8 @@ public final class Browser {
 
     private static Browser instance;
     private static WebDriver driver;
+    private static final int IMPLICITLY_WAIT = Integer.parseInt(ConfigLoader.getProperty("implicitlyWait"));
+
 
     public static Browser getInstance() {
         if (instance == null) {
@@ -26,13 +28,16 @@ public final class Browser {
 
     private Browser() {
     }
+    public static int getImplicitlyWait() {
+        return IMPLICITLY_WAIT;
+    }
 
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public void teardown() {
+    public static void teardown() {
         try {
             instance = null;
             driver.quit();

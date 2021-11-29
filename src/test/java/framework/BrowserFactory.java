@@ -13,16 +13,17 @@ import java.util.Locale;
 public class BrowserFactory {
 
 
-    private WebDriver driver = null;
-
     public WebDriver setUp(String browser) {
 
+        String userDir = System.getProperty("user.dir");
+
+        WebDriver driver = null;
         switch (browser.toUpperCase(Locale.ROOT)) {
             case "CHROME" -> {
                 ChromeOptions options = new ChromeOptions();
                 HashMap<String, Object> chromePref = new HashMap<>();
                 chromePref.put("safebrowsing.enabled", true);
-                chromePref.put("download.default_directory", System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForChrome"));
+                chromePref.put("download.default_directory", userDir + ConfigLoader.getProperty("downloadPathForChrome"));
                 options.setExperimentalOption("prefs", chromePref);
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
                 driver = new ChromeDriver(options);
@@ -31,14 +32,15 @@ public class BrowserFactory {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 FirefoxProfile firefoxProfile = new FirefoxProfile();
                 firefoxProfile.setPreference("browser.download.folderList", 2);
-                System.out.println(System.getProperty("user.dir"));
-                System.out.println(System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForFirefox"));
-                firefoxProfile.setPreference("browser.download.dir",System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForFirefox"));
+                firefoxProfile.setPreference("browser.download.dir",userDir + ConfigLoader.getProperty("downloadPathForFirefox"));
                 firefoxProfile.setPreference("browser.helperApps.neverAsk.openFile", "application/octet-stream");
                 firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream");
                 firefoxOptions.setProfile(firefoxProfile);
                 System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver.exe");
                 driver = new FirefoxDriver(firefoxOptions);
+            }
+            default -> {
+                return null;
             }
         }
        return driver;

@@ -9,27 +9,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static framework.Browser.getImplicitlyWait;
+
 
 public class BaseElement {
 
     protected static Browser browser = Browser.getInstance();
 
     public  WebElement findElement(By locator) {
-        return new WebDriverWait(browser.getDriver(),Integer.parseInt(ConfigLoader.getProperty("implicitlyWait")))
+        return new WebDriverWait(browser.getDriver(),getImplicitlyWait())
                 .until(driver -> driver.findElement(locator));
     }
 
     public  List<WebElement>  findElements(By locator) {
-        return new WebDriverWait(browser.getDriver(),Integer.parseInt(ConfigLoader.getProperty("implicitlyWait")))
+        return new WebDriverWait(browser.getDriver(),getImplicitlyWait())
                 .until(driver -> driver.findElements(locator));
     }
 
     public WebElement findElementByName(String locator, String name) {
-        return new WebDriverWait(browser.getDriver(), Integer.parseInt(ConfigLoader.getProperty("implicitlyWait")))
+        return new WebDriverWait(browser.getDriver(), getImplicitlyWait())
                 .until(driver -> driver.findElement(By.xpath(String.format(locator, name))));
     }
     public  List<WebElement> findElementsByName(String locator, String name) {
-        return new WebDriverWait(browser.getDriver(), Integer.parseInt(ConfigLoader.getProperty("implicitlyWait")))
+        return new WebDriverWait(browser.getDriver(), getImplicitlyWait())
                 .until(driver -> driver.findElements(By.xpath(String.format(locator, name))));
     }
     public  void waitForPageToLoad(){
