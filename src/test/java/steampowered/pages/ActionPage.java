@@ -29,10 +29,11 @@ public class ActionPage extends Page {
     }
 
     public void choseGameWithMaxDiscount() {
+        String nameDisc = "-" + findMaxDiscounts() + "%";
 
-        List<WebElement> maxDiscountsList = baseElement.findElementsByName(DIV_MAX_DISCOUNT, "-" + findMaxDiscounts() + "%");
+        List<WebElement> maxDiscountsList = baseElement.findElementsByName(DIV_MAX_DISCOUNT, nameDisc);
         if(maxDiscountsList.size() == 1){
-            String nameDisc = "-" + findMaxDiscounts() + "%";
+
           baseElement.findElementByName(DIV_MAX_DISCOUNT, nameDisc).click();
         } else {
             int random = (int) (Math.random() * (maxDiscountsList.size()));
