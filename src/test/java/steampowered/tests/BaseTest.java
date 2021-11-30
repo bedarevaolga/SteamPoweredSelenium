@@ -26,7 +26,7 @@ public class BaseTest {
 
     @Test
     @Parameters({"language", "year", "gameName"})
-    public void testChooseGameWithMaxDiscount( String language, String year, String gameName) throws IOException {
+    public void testChooseGameWithMaxDiscount( String language, String year, String gameName)  {
 
         MainPage mainPage = new MainPage(currentBrowser.getDriver());
         mainPage.changeLanguage(language);
