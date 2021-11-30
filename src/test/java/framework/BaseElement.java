@@ -50,14 +50,14 @@ public class BaseElement {
     }
 
     public  boolean isElementPresentedOnPage(By locator) {
-        boolean IsElementDisplayed = true;
+        boolean isElementDisplayed = true;
         try {
             new WebDriverWait(browser.getDriver(), Integer.parseInt(ConfigLoader.getProperty("waitElementVisible")))
                     .until(driver -> driver.findElement(locator));
         } catch (NoSuchElementException | TimeoutException e) {
-            IsElementDisplayed = false;
+            isElementDisplayed = false;
         }
-        return IsElementDisplayed;
+        return isElementDisplayed;
     }
 
     public  String getText(WebElement element) {

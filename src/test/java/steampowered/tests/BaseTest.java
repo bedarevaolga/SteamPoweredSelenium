@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import steampowered.pages.*;
 
-import java.io.IOException;
 
 
 public class BaseTest {
@@ -44,7 +43,8 @@ public class BaseTest {
 
     @AfterClass
     public void closeBrowser() {
-       installPage.deleteInstalledFile();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(installPage.deleteInstalledFile());
         Browser.teardown();
     }
 }

@@ -16,8 +16,8 @@ public class MainPage extends Page {
 
     private final By spnLanguage = By.xpath("//span[@class='pulldown global_action_link']");
     private final By aLanguages = By.xpath("//a[@class=\"popup_menu_item tight\"]");
-    private final String aSection = "//a[@class= 'pulldown_desktop' and text()='%s']";
-    private final String aSubSection = "//div[contains(@class, 'popup_menu_subheader popup_genre_expand_header')]/child::a[contains(text(), '%s')]";
+    private static final String A_SECTION = "//a[@class= 'pulldown_desktop' and text()='%s']";
+    private static final String A_SUB_SECTION = "//div[contains(@class, 'popup_menu_subheader popup_genre_expand_header')]/child::a[contains(text(), '%s')]";
 
 
     public void changeLanguage(String language) {
@@ -34,8 +34,8 @@ public class MainPage extends Page {
 
     public void navigateSection(String section, String subsection) {
         Actions action = new Actions(driver);
-        action.moveToElement(baseElement.findElementByName(aSection, ConfigLoader.getProperty(section))).build().perform();
-        baseElement.clickElement(baseElement.findElementByName(aSubSection, ConfigLoader.getProperty(subsection)));
+        action.moveToElement(baseElement.findElementByName(A_SECTION, ConfigLoader.getProperty(section))).build().perform();
+        baseElement.clickElement(baseElement.findElementByName(A_SUB_SECTION, ConfigLoader.getProperty(subsection)));
     }
 }
 

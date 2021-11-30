@@ -11,10 +11,10 @@ public class GamePage extends Page {
     private final By sltAgeYear = By.xpath("//select[@name='ageYear']");
     private final By aViewPage = By.xpath("//span[text()='View Page']/..");
     private final By divGameName = By.xpath("//div[@id='appHubAppName']");
-    private final String aButton = "//a[contains(text(),'%s')]";
+    private static final  String A_BUTTON = "//a[contains(text(),'%s')]";
 
     public void clickInstallSteam(String installBtn) {
-        baseElement.clickAndWait(aButton, installBtn);
+        baseElement.clickAndWait(A_BUTTON, installBtn);
     }
 
 

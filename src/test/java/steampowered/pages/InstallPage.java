@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.io.IOException;
-
 
 public class InstallPage extends Page{
 
@@ -16,36 +14,36 @@ public class InstallPage extends Page{
         super(driver,By.xpath("//div[@class='online_stats']"));
     }
     private final By aInstallBtn = By.xpath("//a[@class='about_install_steam_link']");
+    private final String userDir = System.getProperty("user.dir");
 
     public void installGame() {
      baseElement.clickElement(aInstallBtn);
     }
 
-
     public boolean isDownloadsExists() {
         WebDriverWait wait = new WebDriverWait(driver, 25);
         String downloadPath = "";
         if (Browser.getInstance().getDriver().toString().contains("Chrome")) {
-            downloadPath = System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForChrome");
+            downloadPath = userDir + ConfigLoader.getProperty("downloadPathForChrome");
         }
         if (Browser.getInstance().getDriver().toString().contains("Firefox")) {
-            downloadPath = System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForFirefox");
+            downloadPath = userDir + ConfigLoader.getProperty("downloadPathForFirefox");
         }
         File file = new File(downloadPath + ConfigLoader.getProperty("downloadedFile"));
         wait.until(driver -> file.exists());
         return file.exists();
     }
 
-    public void deleteInstalledFile() {
+    public boolean deleteInstalledFile() {
 
         String downloadPath = "";
         if (Browser.getInstance().getDriver().toString().contains("Chrome")) {
-            downloadPath = System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForChrome");
+            downloadPath = userDir + ConfigLoader.getProperty("downloadPathForChrome");
         }
         if (Browser.getInstance().getDriver().toString().contains("Firefox")) {
-            downloadPath = System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForFirefox");
+            downloadPath = userDir + ConfigLoader.getProperty("downloadPathForFirefox");
         }
         File file = new File(downloadPath + ConfigLoader.getProperty("downloadedFile"));
-        file.delete();
+        return file.delete();
     }
 }
