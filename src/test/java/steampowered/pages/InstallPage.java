@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-
+import java.io.IOException;
 
 
 public class InstallPage extends Page{
@@ -22,7 +22,7 @@ public class InstallPage extends Page{
     }
 
 
-    public boolean isDownloadsExists() {
+    public boolean isDownloadsExists() throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, 25);
         String downloadPath = "";
         if (Browser.getInstance().getDriver().toString().contains("Chrome")) {
@@ -34,6 +34,7 @@ public class InstallPage extends Page{
         }
         File file = new File(downloadPath + ConfigLoader.getProperty("downloadedFile"));
         System.out.println(downloadPath + ConfigLoader.getProperty("downloadedFile"));
+        System.out.println(file.getCanonicalFile());
         wait.until(driver -> file.exists());
         return file.exists();
     }
