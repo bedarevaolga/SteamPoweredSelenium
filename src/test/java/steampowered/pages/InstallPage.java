@@ -27,11 +27,13 @@ public class InstallPage extends Page{
         String downloadPath = "";
         if (Browser.getInstance().getDriver().toString().contains("Chrome")) {
             downloadPath = System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForChrome");
+            System.out.println(System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForChrome"));
         }
         if (Browser.getInstance().getDriver().toString().contains("Firefox")) {
             downloadPath = System.getProperty("user.dir") + ConfigLoader.getProperty("downloadPathForFirefox");
         }
         File file = new File(downloadPath + ConfigLoader.getProperty("downloadedFile"));
+        System.out.println(downloadPath + ConfigLoader.getProperty("downloadedFile"));
         wait.until(driver -> file.exists());
         return file.exists();
     }
