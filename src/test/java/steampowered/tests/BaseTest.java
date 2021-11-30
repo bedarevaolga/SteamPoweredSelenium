@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import steampowered.pages.*;
 
+import java.io.IOException;
+
 
 public class BaseTest {
 
@@ -24,7 +26,7 @@ public class BaseTest {
 
     @Test
     @Parameters({"language", "year", "gameName"})
-    public void testChooseGameWithMaxDiscount( String language, String year, String gameName)  {
+    public void testChooseGameWithMaxDiscount( String language, String year, String gameName) throws IOException {
 
         MainPage mainPage = new MainPage(currentBrowser.getDriver());
         mainPage.changeLanguage(language);
