@@ -16,14 +16,6 @@ public class BrowserFactory {
 
 
     public WebDriver setUp(String browser)  {
-        File file= new File("src/test/resources/download/chromeDownloads");
-        String path = null;
-        try {
-            path = file.getCanonicalPath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(path);
 
         String userDir = System.getProperty("user.dir");
 
@@ -33,7 +25,7 @@ public class BrowserFactory {
                 ChromeOptions options = new ChromeOptions();
                 HashMap<String, Object> chromePref = new HashMap<>();
                 chromePref.put("safebrowsing.enabled", true);
-                chromePref.put("download.default_directory", path + ConfigLoader.getProperty("downloadPathForChrome"));
+                chromePref.put("download.default_directory", userDir + ConfigLoader.getProperty("downloadPathForChrome"));
                 options.setExperimentalOption("prefs", chromePref);
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
                 driver = new ChromeDriver(options);

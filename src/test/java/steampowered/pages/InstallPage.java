@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.io.IOException;
+
 
 
 public class InstallPage extends Page{
@@ -23,19 +23,11 @@ public class InstallPage extends Page{
     }
 
     public boolean isDownloadsExists() {
-        File file0= new File("src/test/resources/download/chromeDownloads");
-        String path = null;
-        try {
-            path = file0.getCanonicalPath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(path);
 
         WebDriverWait wait = new WebDriverWait(driver, 25);
         String downloadPath = "";
         if (Browser.getInstance().getDriver().toString().contains("Chrome")) {
-            downloadPath = path + ConfigLoader.getProperty("downloadPathForChrome");
+            downloadPath = userDir + ConfigLoader.getProperty("downloadPathForChrome");
             System.out.println(downloadPath);
         }
         if (Browser.getInstance().getDriver().toString().contains("Firefox")) {
